@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container my-3">
+  <table class="table">
+    <thead>
+      <tr class="table-dark">
+        <th>번호</th>
+        <th>제목</th>
+        <th>작성일시</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% if post_list %}
+        {% for post in post_list %}
+      <tr>
+        <td>{{forloop.counter}}</td>
+        <td>
+          <a href="{% url 'blog:detail' post_id=post.id %}">
+            {{post.subject}}
+          </a>
+        </td>
+        <td>{{post.create_date}}</td>
+      </tr>
+        {% endfor %}
+        {% else %}
+      <tr>
+        <td colspan="3">등록된 포스트가 없습니다.</td>
+      </tr>
+      {% endif %}
+    </tbody>
+  </table>
+  <a href="{% url 'blog:post_create' %}" class="btn btn-primary">포스트 등록</a>
+</div>
+
+{% endblock content %}
